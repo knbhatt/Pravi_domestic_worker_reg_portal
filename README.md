@@ -58,13 +58,36 @@ Domestic workers (maids, cooks, drivers, gardeners) in India often lack formal p
 ---
 
 ## 📂 Project Structure
-
-```text
 domestic-worker-reg/
-├── accounts/           # Auth, OTP, and JWT logic
-├── workers/            # Profile and experience management
-├── documents/          # AI-powered document processing
-├── applications/       # Registration workflow & status tracking
-├── id_cards/           # ReportLab PDF & QR generation logic
-├── config/             # Root settings & Celery config
-└── templates/          # Responsive HTML interfaces
+├── config/                      # Root Project Configuration
+│   ├── settings.py              # Security, DB, S3, & JWT Config
+│   ├── urls.py                  # Global Route Dispatcher
+│   └── celery.py                # Async Task Queue Setup
+├── accounts/                    # Auth & Identity Management
+│   ├── authentication.py        # Custom JWT Logic
+│   ├── models.py                # OTPRecord & Phone Identity
+│   └── serializers.py           # Login/OTP Validation logic
+├── workers/                     # Worker Data Management
+│   ├── models.py                # Profile & Skill Schemas
+│   └── views.py                 # Profile CRUD Operations
+├── documents/                   # Media & Storage Logic
+│   ├── models.py                # Metadata for Aadhaar & Photos
+│   └── views.py                 # S3 Upload & Retrieval
+├── applications/                # Workflow Engine
+│   ├── models.py                # Status: Draft -> Review -> Approved
+│   └── serializers.py           # Application lifecycle logic
+├── notifications/               # Communication Layer
+│   ├── sms.py                   # MSG91/SMS Gateway Integration
+│   └── tasks.py                 # Celery Async SMS workers
+├── id_cards/                    # Document Generation
+│   ├── generator.py             # ReportLab PDF & QR Code Logic
+│   └── tasks.py                 # Automated PDF creation on Approval
+├── worker_portal/               # Unified Frontend Service
+│   ├── ai_services.py           # OCR & Blur Detection Algorithms
+│   └── views.py                 # Multi-step Form & Dashboard Views
+├── templates/                   # UI Layer (HTML5/Bootstrap)
+│   ├── base.html                # Global Layout & Navigation
+│   └── worker/                  # Step-by-step Registration UI
+├── .env.example                 # Template for Secure Environment Variables
+├── Dockerfile                   # Container Configuration
+└── docker-compose.yml           # Multi-container (Web, DB, Redis) Orchestration
