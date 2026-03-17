@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-5">
+        <div class="text-center mb-4">
+            <div style="width:72px;height:72px;background:#1a3a5c;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                <i class="bi bi-shield-lock text-white" style="font-size:32px;"></i>
+            </div>
+            <h4 class="fw-bold">Enter OTP</h4>
+            <p class="text-muted">Sent to +91 {{ phone_number }}</p>
+        </div>
+        <div class="card p-4">
+            <form method="post" id="otpForm">
+                {% csrf_token %}
+                <input type="hidden" name="phone_number" value="{{ phone_number }}">
+                <div class="d-flex justify-content-center mb-4">
+                    <input type="text" class="otp-input" maxlength="1" id="otp1" autofocus>
+                    <input type="text" class="otp-input" maxlength="1" id="otp2">
+                    <input type="text" class="otp-input" maxlength="1" id="otp3">
+                    <input type="text" class="otp-input" maxlength="1" id="otp4">
+                    <input type="text" class="otp-input" maxlength="1" id="otp5">
+                    <input type="text" class="otp-input" maxlength="1" id="otp6">
+                </div>
+                <input type="hidden" name="otp_code" id="otpValue">
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-600" id="verifyBtn">
+                    <i class="bi bi-check-circle me-2"></i>Verify OTP
+                </button>
+            </form>
+            <div class="text-center mt-3">
+                <span class="text-muted" style="font-size:13px;">Didn't receive? </span>
+                <a href="/worker/login/" style="font-size:13px;">Resend OTP</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+const inputs = document.querySelectorAll('.otp-input');
+inputs.forEach((input, i) => {
+    input.addEventListener('input', () => {
+        if (input.value && i < inputs.length - 1) inputs[i+1].focus();
+        updateHidden();
+    });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && i > 0) inputs[i-1].focus();
+    });
+});
+function updateHidden() {
+    document.getElementById('otpValue').value = Array.from(inputs).map(i => i.value).join('');
+}
+document.getElementById('otpForm').addEventListener('submit', (e) => {
+    updateHidden();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Your ID Card{% endblock %}
+{% block content %}
+<div style="background:#1a3a5c;border-radius:12px;padding:20px;color:white;margin-bottom:16px;">
+    <div class="text-center mb-3">
+        <div style="font-size:11px;opacity:0.8;letter-spacing:1px;">GOVERNMENT OF GUJARAT</div>
+        <div style="font-size:14px;font-weight:700;letter-spacing:1px;">DOMESTIC WORKER REGISTRATION</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:16px;">
+        <div class="row align-items-center">
+            <!-- Photo -->
+            <div class="col-3 text-center">
+                {% if worker_photo %}
+                <img src="{{ worker_photo }}"
+                     style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid white;"
+                     alt="Worker Photo">
+                {% else %}
+                <div style="width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto;border:3px solid white;">
+                    <i class="bi bi-person" style="font-size:32px;color:white;"></i>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Details -->
+            <div class="col-9">
+                <div style="font-size:11px;opacity:0.7;">FULL NAME</div>
+                <div style="font-size:16px;font-weight:700;">{{ worker.full_name }}</div>
+                <div class="mt-2" style="font-size:11px;opacity:0.7;">CARD NUMBER</div>
+                <div style="font-size:13px;font-weight:600;">{{ id_card.card_number }}</div>
+                <div class="mt-2 row">
+                    <div class="col-6">
+                        <div style="font-size:11px;opacity:0.7;">VALID UNTIL</div>
+                        <div style="font-size:12px;">{{ id_card.valid_until }}</div>
+                    </div>
+                    <div class="col-6">
+                        <div style="font-size:11px;opacity:0.7;">REF ID</div>
+                        <div style="font-size:12px;">{{ application.reference_id }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3" style="font-size:10px;opacity:0.6;">
+        Labour Department, Gujarat &nbsp;|&nbsp; Issued: {{ id_card.issued_at|date:"d M Y" }}
+    </div>
+</div>
+
+            <!-- Download Button -->
+            {% if id_card.pdf_s3_url %}
+            <a href="{{ id_card.pdf_s3_url }}" target="_blank"
+            class="btn btn-success w-100 py-3 mb-2">
+                <i class="bi bi-download me-2"></i>Download ID Card PDF
+            </a>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                PDF not available yet.
+            </div>
+            {% endif %}
+            
+
+            <div class="row g-2 mt-1">
+                <div class="col-6">
+                    <div class="card p-3 text-center" style="background:#f8f9fa;">
+                        <div style="font-size:11px;color:#6c757d;">Card Number</div>
+                        <div style="font-size:13px;font-weight:600;">{{ id_card.card_number }}</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card p-3 text-center" style="background:#f8f9fa;">
+                        <div style="font-size:11px;color:#6c757d;">Issued On</div>
+                        <div style="font-size:13px;font-weight:600;">{{ id_card.issued_at|date:"d M Y" }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="/worker/dashboard/" class="btn btn-outline-secondary w-100">
+            <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

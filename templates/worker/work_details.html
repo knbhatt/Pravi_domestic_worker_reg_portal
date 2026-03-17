@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Work Details{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <h5 class="fw-bold mb-4"><i class="bi bi-briefcase me-2"></i>Work Details</h5>
+        <div class="card p-4">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Type of Work *</label>
+                    <select name="work_type" class="form-select" required>
+                        <option value="">Select work type</option>
+                        <option value="maid" {% if profile.work_type == 'maid' %}selected{% endif %}>Maid / Housekeeping</option>
+                        <option value="cook" {% if profile.work_type == 'cook' %}selected{% endif %}>Cook</option>
+                        <option value="driver" {% if profile.work_type == 'driver' %}selected{% endif %}>Driver</option>
+                        <option value="gardener" {% if profile.work_type == 'gardener' %}selected{% endif %}>Gardener</option>
+                        <option value="security" {% if profile.work_type == 'security' %}selected{% endif %}>Security Guard</option>
+                        <option value="childcare" {% if profile.work_type == 'childcare' %}selected{% endif %}>Child Care</option>
+                        <option value="eldercare" {% if profile.work_type == 'eldercare' %}selected{% endif %}>Elder Care</option>
+                        <option value="other" {% if profile.work_type == 'other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Years of Experience *</label>
+                    <input type="number" name="years_experience" class="form-control" min="0" max="50"
+                           value="{{ profile.years_experience|default:0 }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Languages Known *</label>
+                    <input type="text" name="languages_known" class="form-control"
+                           placeholder="Hindi, Gujarati, English"
+                           value="{{ profile.languages_known }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Availability *</label>
+                    <select name="availability" class="form-select" required>
+                        <option value="">Select availability</option>
+                        <option value="full_time" {% if profile.availability == 'full_time' %}selected{% endif %}>Full Time</option>
+                        <option value="part_time" {% if profile.availability == 'part_time' %}selected{% endif %}>Part Time</option>
+                        <option value="live_in" {% if profile.availability == 'live_in' %}selected{% endif %}>Live-in</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Expected Salary (₹/month)</label>
+                    <input type="number" name="expected_salary" class="form-control"
+                           value="{{ profile.expected_salary }}">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-3">
+                    <i class="bi bi-save me-2"></i>Save & Continue
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

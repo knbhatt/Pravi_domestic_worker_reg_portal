@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}My Dashboard{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-7">
+        <div class="d-flex align-items-center mb-4">
+            <div style="width:48px;height:48px;background:#1a3a5c;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+                <i class="bi bi-person text-white" style="font-size:22px;"></i>
+            </div>
+            <div>
+                <h5 class="mb-0 fw-bold">{{ worker.full_name|default:"Welcome" }}</h5>
+                <small class="text-muted">+91 {{ worker.phone_number }}</small>
+            </div>
+        </div>
+
+        <!-- Application Status Card -->
+        <div class="card p-4 mb-3">
+            <h6 class="fw-bold mb-3"><i class="bi bi-clipboard-check me-2"></i>Application Status</h6>
+            {% if application %}
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Reference ID: <strong>{{ application.reference_id }}</strong></span>
+                    {% if application.status == 'approved' %}
+                        <span class="status-badge" style="background:#d1fae5;color:#065f46;">Approved</span>
+                    {% elif application.status == 'rejected' %}
+                        <span class="status-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>
+                    {% elif application.status == 'submitted' %}
+                        <span class="status-badge" style="background:#fef3c7;color:#92400e;">Under Review</span>
+                    {% else %}
+                        <span class="status-badge" style="background:#e0e7ff;color:#3730a3;">Draft</span>
+                    {% endif %}
+                </div>
+                {% if application.status == 'rejected' and application.rejection_reason %}
+                <div class="alert alert-danger mt-3 mb-0" style="font-size:13px;">
+                    <strong>Reason:</strong> {{ application.rejection_reason }}
+                </div>
+                {% endif %}
+                {% if application.status == 'approved' %}
+                <a href="/worker/id-card/" class="btn btn-success w-100 mt-3">
+                    <i class="bi bi-download me-2"></i>Download ID Card
+                </a>
+                {% endif %}
+            {% else %}
+                <p class="text-muted mb-0">No application submitted yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Steps -->
+        <div class="card p-4 mb-3">
+            <h6 class="fw-bold mb-3"><i class="bi bi-list-check me-2"></i>Complete Your Registration</h6>
+            <div class="d-flex flex-column gap-2">
+                <a href="/worker/profile/" class="d-flex align-items-center p-3 rounded text-decoration-none" style="background:{% if worker.full_name %}#d1fae5{% else %}#f8f9fa{% endif %};">
+                    <i class="bi bi-{% if worker.full_name %}check-circle-fill text-success{% else %}circle text-muted{% endif %} me-3" style="font-size:20px;"></i>
+                    <div>
+                        <div class="fw-500" style="color:#1a3a5c;">Personal Details</div>
+                        <small class="text-muted">Name, DOB, address</small>
+                    </div>
+                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
+                </a>
+                <a href="/worker/work-details/" class="d-flex align-items-center p-3 rounded text-decoration-none" style="background:{% if has_work_profile %}#d1fae5{% else %}#f8f9fa{% endif %};">
+                    <i class="bi bi-{% if has_work_profile %}check-circle-fill text-success{% else %}circle text-muted{% endif %} me-3" style="font-size:20px;"></i>
+                    <div>
+                        <div class="fw-500" style="color:#1a3a5c;">Work Details</div>
+                        <small class="text-muted">Skills, experience</small>
+                    </div>
+                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
+                </a>
+                <a href="/worker/documents/" class="d-flex align-items-center p-3 rounded text-decoration-none" style="background:{% if has_aadhaar and has_photo %}#d1fae5{% else %}#f8f9fa{% endif %};">
+                    <i class="bi bi-{% if has_aadhaar and has_photo %}check-circle-fill text-success{% else %}circle text-muted{% endif %} me-3" style="font-size:20px;"></i>
+                    <div>
+                        <div class="fw-500" style="color:#1a3a5c;">Upload Documents</div>
+                        <small class="text-muted">Aadhaar + photo</small>
+                    </div>
+                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
+                </a>
+            </div>
+            {% if worker.full_name and has_work_profile and has_aadhaar and has_photo %}
+            <form method="post" action="/worker/submit/" class="mt-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary w-100 py-3">
+                    <i class="bi bi-send me-2"></i>Submit Application
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

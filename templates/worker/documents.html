@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}Upload Documents{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <h5 class="fw-bold mb-4"><i class="bi bi-file-earmark-text me-2"></i>Upload Documents</h5>
+
+        <!-- Aadhaar Upload Card -->
+        <div class="card p-4 mb-3">
+            <h6 class="fw-bold mb-1"><i class="bi bi-credit-card me-2"></i>Aadhaar Card</h6>
+            <p class="text-muted mb-3" style="font-size:13px;">Upload a clear photo or scan of your Aadhaar card</p>
+
+            {% if has_aadhaar %}
+            <div class="alert alert-success py-2 mb-3">
+                <i class="bi bi-check-circle me-2"></i>Aadhaar uploaded successfully
+            </div>
+            {% endif %}
+
+            {% if quality_issues %}
+            <div class="alert alert-danger py-2 mb-3">
+                <strong><i class="bi bi-exclamation-triangle me-2"></i>Document Quality Issues:</strong>
+                <ul class="mb-0 mt-1">
+                    {% for issue in quality_issues %}
+                    <li style="font-size:13px;">{{ issue }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if match_result %}
+            <div class="alert {% if match_result.is_match %}alert-success{% else %}alert-warning{% endif %} py-2 mb-3">
+                <strong>
+                    <i class="bi bi-{% if match_result.is_match %}check-circle{% else %}exclamation-triangle{% endif %} me-2"></i>
+                    Aadhaar Verification: {{ match_result.overall_score }}% match
+                </strong>
+                <p class="mb-0 mt-1" style="font-size:13px;">{{ match_result.message }}</p>
+                {% if match_result.field_results %}
+                <div class="mt-2">
+                    {% for field, result in match_result.field_results.items %}
+                    <span class="badge {% if result.match %}bg-success{% else %}bg-danger{% endif %} me-1">
+                        {{ field }}: {% if result.match %}✓{% else %}✗{% endif %}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if ocr_data %}
+            <div class="alert alert-info py-2 mb-3">
+                <strong><i class="bi bi-magic me-2"></i>Auto-detected from Aadhaar:</strong>
+                <div class="mt-2" style="font-size:13px;">
+                    {% if ocr_data.name %}<div>Name: <strong>{{ ocr_data.name }}</strong></div>{% endif %}
+                    {% if ocr_data.date_of_birth %}<div>DOB: <strong>{{ ocr_data.date_of_birth }}</strong></div>{% endif %}
+                    {% if ocr_data.gender %}<div>Gender: <strong>{{ ocr_data.gender }}</strong></div>{% endif %}
+                    {% if ocr_data.pincode %}<div>Pincode: <strong>{{ ocr_data.pincode }}</strong></div>{% endif %}
+                </div>
+                <a href="/worker/profile/?autofill=1" class="btn btn-sm btn-info mt-2">
+                    <i class="bi bi-magic me-1"></i>Auto-fill my profile with this data
+                </a>
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" action="/worker/upload/aadhaar/">
+                {% csrf_token %}
+
+                <!-- Upload mode toggle -->
+                <div class="mb-3">
+                    <label class="form-label fw-500">Upload Mode</label>
+                    <div class="d-flex gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="upload_mode"
+                                   id="mode_manual" value="manual" checked>
+                            <label class="form-check-label" for="mode_manual">
+                                Manual entry (verify against Aadhaar)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="upload_mode"
+                                   id="mode_auto" value="auto">
+                            <label class="form-check-label" for="mode_auto">
+                                Auto-fill from Aadhaar
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="file" name="file" class="form-control mb-2"
+                       accept=".jpg,.jpeg,.png,.pdf" required
+                       id="aadhaarFile">
+                <small class="text-muted d-block mb-3">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Accepted: JPG, PNG only. Max 5MB. Take a clear photo of your Aadhaar card. AI will verify automatically.
+                </small>
+                <button type="submit" class="btn btn-primary w-100 py-2">
+                    <i class="bi bi-upload me-2"></i>Upload & Verify Aadhaar
+                </button>
+            </form>
+        </div>
+
+        <!-- Photo Upload Card -->
+        <div class="card p-4 mb-3">
+            <h6 class="fw-bold mb-1"><i class="bi bi-camera me-2"></i>Profile Photo</h6>
+            <p class="text-muted mb-3" style="font-size:13px;">Upload a clear passport-size photo of your face</p>
+
+            {% if has_photo %}
+            <div class="alert alert-success py-2 mb-3">
+                <i class="bi bi-check-circle me-2"></i>Photo uploaded successfully
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" action="/worker/upload/photo/">
+                {% csrf_token %}
+                <input type="file" name="file" class="form-control mb-2"
+                       accept=".jpg,.jpeg,.png" required>
+                <small class="text-muted d-block mb-3">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Accepted: JPG, PNG. Max 2MB. Use a clear face photo in good lighting.
+                </small>
+                <button type="submit" class="btn btn-primary w-100 py-2">
+                    <i class="bi bi-camera me-2"></i>Upload Photo
+                </button>
+            </form>
+        </div>
+
+        <a href="/worker/dashboard/" class="btn btn-outline-secondary w-100">
+            <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

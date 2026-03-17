@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block title %}Domestic Worker Registration Portal — Government of Gujarat{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div style="background:linear-gradient(135deg,#1a3a5c 0%,#2d5986 100%);margin:-24px -12px 0;padding:60px 24px;color:white;text-align:center;">
+    <div style="max-width:700px;margin:0 auto;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:20px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                 style="height:64px;filter:brightness(0) invert(1);" alt="Emblem of India">
+            <div style="text-align:left;">
+                <div style="font-size:13px;opacity:0.8;letter-spacing:1px;">GOVERNMENT OF GUJARAT</div>
+                <div style="font-size:11px;opacity:0.7;">Labour & Employment Department</div>
+            </div>
+        </div>
+        <h1 style="font-size:clamp(22px,4vw,36px);font-weight:700;margin-bottom:12px;line-height:1.3;">
+            Domestic Worker Registration Portal
+        </h1>
+        <p style="font-size:16px;opacity:0.85;margin-bottom:32px;line-height:1.6;">
+            Register as a domestic worker, get your official government ID card,
+            and access welfare benefits — all in one place.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="/worker/login/" class="btn btn-light btn-lg px-4 py-3 fw-600"
+               style="border-radius:8px;color:#1a3a5c;font-size:15px;">
+                <i class="bi bi-person-plus me-2"></i>Register / Login
+            </a>
+            <a href="#how-it-works" class="btn btn-outline-light btn-lg px-4 py-3"
+               style="border-radius:8px;font-size:15px;">
+                <i class="bi bi-play-circle me-2"></i>How it works
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Bar -->
+<div style="background:#f0f4f8;padding:24px 0;margin:0 -12px;">
+    <div class="container">
+        <div class="row text-center g-3">
+            <div class="col-6 col-md-3">
+                <div style="font-size:28px;font-weight:700;color:#1a3a5c;">12,400+</div>
+                <div style="font-size:13px;color:#6c757d;">Workers Registered</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div style="font-size:28px;font-weight:700;color:#1a3a5c;">8,200+</div>
+                <div style="font-size:13px;color:#6c757d;">ID Cards Issued</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div style="font-size:28px;font-weight:700;color:#1a3a5c;">33</div>
+                <div style="font-size:13px;color:#6c757d;">Districts Covered</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div style="font-size:28px;font-weight:700;color:#1a3a5c;">24/7</div>
+                <div style="font-size:13px;color:#6c757d;">Online Access</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works -->
+<div id="how-it-works" style="padding:48px 0;">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-2" style="color:#1a3a5c;">How it works</h2>
+        <p class="text-center text-muted mb-5">Complete your registration in 4 simple steps</p>
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center h-100">
+                    <div style="width:56px;height:56px;background:#e8f0fe;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                        <i class="bi bi-phone" style="font-size:24px;color:#1a3a5c;"></i>
+                    </div>
+                    <div style="background:#1a3a5c;color:white;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">1</div>
+                    <h6 class="fw-bold">Login with OTP</h6>
+                    <p class="text-muted" style="font-size:13px;">Enter your mobile number and verify with a 6-digit OTP</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center h-100">
+                    <div style="width:56px;height:56px;background:#e8f0fe;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                        <i class="bi bi-person-lines-fill" style="font-size:24px;color:#1a3a5c;"></i>
+                    </div>
+                    <div style="background:#1a3a5c;color:white;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">2</div>
+                    <h6 class="fw-bold">Fill Your Details</h6>
+                    <p class="text-muted" style="font-size:13px;">Enter personal details and work information</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center h-100">
+                    <div style="width:56px;height:56px;background:#e8f0fe;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                        <i class="bi bi-file-earmark-text" style="font-size:24px;color:#1a3a5c;"></i>
+                    </div>
+                    <div style="background:#1a3a5c;color:white;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">3</div>
+                    <h6 class="fw-bold">Upload Documents</h6>
+                    <p class="text-muted" style="font-size:13px;">Upload Aadhaar card and photo. AI verifies automatically</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center h-100">
+                    <div style="width:56px;height:56px;background:#e8f0fe;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                        <i class="bi bi-patch-check" style="font-size:24px;color:#1a3a5c;"></i>
+                    </div>
+                    <div style="background:#1a3a5c;color:white;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">4</div>
+                    <h6 class="fw-bold">Get ID Card</h6>
+                    <p class="text-muted" style="font-size:13px;">After approval, download your official government ID card</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Benefits Section -->
+<div style="background:#f0f4f8;padding:48px 0;margin:0 -12px;">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-2" style="color:#1a3a5c;">Benefits of registration</h2>
+        <p class="text-center text-muted mb-5">Why every domestic worker should register</p>
+        <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#d1fae5;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-shield-check" style="color:#065f46;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Official Identity Proof</div>
+                        <div class="text-muted" style="font-size:13px;">Government-issued ID card accepted as valid proof of employment</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-heart-pulse" style="color:#1e40af;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Welfare Benefits</div>
+                        <div class="text-muted" style="font-size:13px;">Access to health insurance and government welfare schemes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#fef3c7;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-cash-coin" style="color:#92400e;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Minimum Wage Protection</div>
+                        <div class="text-muted" style="font-size:13px;">Legal protection ensuring minimum wage standards</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#ede9fe;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-building" style="color:#5b21b6;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Employer Trust</div>
+                        <div class="text-muted" style="font-size:13px;">Verified profile builds trust with potential employers</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#fce7f3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-award" style="color:#9d174d;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Skill Recognition</div>
+                        <div class="text-muted" style="font-size:13px;">Official record of your skills and work experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3">
+                    <div style="width:40px;height:40px;background:#d1fae5;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="bi bi-phone" style="color:#065f46;font-size:18px;"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold" style="font-size:14px;">Mobile Friendly</div>
+                        <div class="text-muted" style="font-size:13px;">Register and check status from any mobile phone browser</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Features Section -->
+<div style="padding:48px 0;">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-2" style="color:#1a3a5c;">Powered by AI</h2>
+        <p class="text-center text-muted mb-5">Smart technology making registration easier and more secure</p>
+        <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-4">
+                <div class="card p-4 text-center h-100" style="border-left:4px solid #1a3a5c;border-radius:0 12px 12px 0;">
+                    <i class="bi bi-magic mb-3" style="font-size:36px;color:#1a3a5c;"></i>
+                    <h6 class="fw-bold">Auto-fill from Aadhaar</h6>
+                    <p class="text-muted" style="font-size:13px;">Upload your Aadhaar card and AI automatically fills your name, date of birth, and address</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card p-4 text-center h-100" style="border-left:4px solid #198754;border-radius:0 12px 12px 0;">
+                    <i class="bi bi-eye mb-3" style="font-size:36px;color:#198754;"></i>
+                    <h6 class="fw-bold">Document Quality Check</h6>
+                    <p class="text-muted" style="font-size:13px;">AI instantly detects blurry, dark, or incorrectly cropped documents before submission</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card p-4 text-center h-100" style="border-left:4px solid #dc3545;border-radius:0 12px 12px 0;">
+                    <i class="bi bi-patch-check mb-3" style="font-size:36px;color:#dc3545;"></i>
+                    <h6 class="fw-bold">Aadhaar Verification</h6>
+                    <p class="text-muted" style="font-size:13px;">AI cross-checks manually entered details against Aadhaar data to prevent fraud</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div style="background:#1a3a5c;padding:48px 24px;margin:0 -12px;text-align:center;color:white;">
+    <h2 class="fw-bold mb-3">Ready to register?</h2>
+    <p style="opacity:0.85;margin-bottom:28px;font-size:16px;">
+        It takes less than 5 minutes. All you need is your mobile number and Aadhaar card.
+    </p>
+    <a href="/worker/login/" class="btn btn-light btn-lg px-5 py-3 fw-600"
+       style="border-radius:8px;color:#1a3a5c;font-size:15px;">
+        <i class="bi bi-person-plus me-2"></i>Start Registration
+    </a>
+</div>
+
+<!-- Footer -->
+<div style="background:#0f2840;padding:24px;margin:0 -12px;text-align:center;color:rgba(255,255,255,0.5);font-size:13px;">
+    <div class="mb-2">
+        <a href="/admin/" style="color:rgba(255,255,255,0.4);text-decoration:none;margin:0 12px;">
+            <i class="bi bi-shield-lock me-1"></i>Officer Login
+        </a>
+        <a href="/worker/login/" style="color:rgba(255,255,255,0.4);text-decoration:none;margin:0 12px;">
+            <i class="bi bi-person me-1"></i>Worker Login
+        </a>
+    </div>
+    Government of Gujarat — Labour & Employment Department |
+    Domestic Worker Registration Portal © 2026
+</div>
+
+{% endblock %}

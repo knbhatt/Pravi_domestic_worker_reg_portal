@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Login — Worker Portal{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-5">
+        <div class="text-center mb-4">
+            <div style="width:72px;height:72px;background:#1a3a5c;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                <i class="bi bi-phone text-white" style="font-size:32px;"></i>
+            </div>
+            <h4 class="fw-bold">Welcome</h4>
+            <p class="text-muted">Enter your mobile number to get started</p>
+        </div>
+        <div class="card p-4">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-500">Mobile Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text">+91</span>
+                        <input type="tel" name="phone_number" class="form-control form-control-lg"
+                               placeholder="9876543210" maxlength="10" pattern="[6-9][0-9]{9}"
+                               required autofocus>
+                    </div>
+                    <div class="form-text">We'll send a 6-digit OTP to this number</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-600">
+                    <i class="bi bi-arrow-right-circle me-2"></i>Send OTP
+                </button>
+            </form>
+        </div>
+        <p class="text-center text-muted mt-3" style="font-size:13px;">
+            <i class="bi bi-shield-check me-1"></i>
+            Your data is safe and used only for registration
+        </p>
+    </div>
+</div>
+{% endblock %}
